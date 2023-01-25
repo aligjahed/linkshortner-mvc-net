@@ -1,9 +1,11 @@
+using linkshortner_mvc_net;
 using linkshortner_mvc_net.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+// All Services are inside ConfigureServices.cs
+builder.Services.AddWebUI();
 
 var app = builder.Build();
 
@@ -23,9 +25,7 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseAuthorization();
 
-app.UseExceptionHandler("/Home/TestError");
-
-//app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllerRoute(
     name: "default",
