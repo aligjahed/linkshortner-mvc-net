@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using linkshortner_mvc_net.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using linkshortner_mvc_net.Models;
 
@@ -11,9 +10,5 @@ public class HomeController : Controller
     {
         return View();
     }
-
-    public IActionResult TestError()
-    {
-        throw new UserNotFoundException();
-    }
+    
 }
