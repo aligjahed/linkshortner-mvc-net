@@ -21,20 +21,21 @@
         font-size: 24px;
       }
     }
-  }
-  
-  .form-sec {
-    width: 350px;
-  }
-  
-  .form-div{
-    label {
-      font-size: 24px;
+    
+    &-form-sec {
+      width: 350px;
     }
     
-    input { 
-      height: 45px;
+    &-form-div{
+      label {
+        font-size: 24px;
+      }
+      
+      input { 
+        height: 45px;
+      }
     }
   }
+  
 
 }

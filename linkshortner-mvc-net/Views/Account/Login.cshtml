@@ -4,36 +4,38 @@
     ViewData["Title"] = "Login";
 }
 
-<!DOCTYPE html>
-
-<div class="d-flex w-100 h-100 flex-column align-items-center login">
+<div class="d-flex w-100 h-100 flex-column align-items-center register">
     <div class="text-center login-header pb-4 mb-md-5">
         <h1>Login</h1>
         <p>Login to LinkShortner using your email or password</p>
     </div>
     <div class="row row-cols-lg-auto justify-content-around w-100">
         <section class="mb-4 form-sec">
-            <form id="EmailLoginForm" asp-action="Login" asp-controller="Account">
+            <form id="EmailLoginForm" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
                 <div class="mb-2 form-div">
                     <label for="emailInput" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="emailInput"/>
+                    <input type="email" class="form-control" id="emailInput" required/>
+                    <div class="invalid-feedback">Please enter a your email</div>
                 </div>
                 <div class="mb-5 form-div">
                     <label for="passwordInputEmail" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="passwordInputEmail"/>
+                    <input type="password" class="form-control" id="passwordInputEmail" required/>
+                    <div class="invalid-feedback">Please enter a password</div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Login with Email</button>
             </form>
         </section>
         <section class="form-sec">
-            <form id="usernameLoginForm" asp-action="Login" asp-controller="Account">
+            <form id="usernameLoginForm" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
                 <div class="mb-2 form-div">
                     <label for="usernameInputInput" class="form-label">Username</label>
-                    <input type="email" class="form-control" id="usernameInput"/>
+                    <input type="email" class="form-control" id="usernameInput" required/>
+                    <div class="invalid-feedback">Please enter your username</div>
                 </div>
                 <div class="mb-5 form-div">
                     <label for="passwordInputUsername" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="passwordInputUsername"/>
+                    <input type="password" class="form-control" id="passwordInputUsername" required/>
+                    <div class="invalid-feedback">Please enter a password</div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary ">Login with Username</button>
             </form>
