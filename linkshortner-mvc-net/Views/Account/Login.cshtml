@@ -7,9 +7,9 @@
 <div class="d-flex w-100 h-100 flex-column align-items-center register">
     <div class="text-center login-header pb-4 mb-md-5">
         <h1>Login</h1>
-        <p>Login to LinkShortner using your email or password</p>
+        <p>Login to LinkShortner using your email/username and password</p>
     </div>
-    <div class="row row-cols-lg-auto justify-content-around w-100">
+    <div class="row row-cols-lg-auto justify-content-around w-100 mb-5">
         <section class="mb-4 form-sec">
             <form id="EmailLoginForm" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
                 <div class="mb-2 form-div">
@@ -41,4 +41,5 @@
             </form>
         </section>
     </div>
+    <p>Not a user? <a asp-action="Register" asp-controller="Account" class="link-primary">Register</a></p>
 </div>
