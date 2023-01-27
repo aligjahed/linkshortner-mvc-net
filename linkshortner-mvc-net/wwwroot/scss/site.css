@@ -1,3 +1,6 @@
+.home-page {
+  padding: 64px;
+}
 .home-page-header {
   margin-bottom: 16px;
 }
@@ -86,14 +89,40 @@
   .login-header p {
     font-size: 24px;
   }
-  .form-sec {
+  .login-form-sec {
     width: 350px;
   }
-  .form-div label {
+  .login-form-div label {
     font-size: 24px;
   }
-  .form-div input {
+  .login-form-div input {
     height: 45px;
+  }
+}
+.register {
+  padding: 24px;
+}
+.register-header h1 {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .register {
+    padding: 64px;
+  }
+  .register-header h1 {
+    font-size: 48px;
+  }
+  .register-header p {
+    font-size: 24px;
+  }
+  .register-form-div label {
+    font-size: 24px;
+  }
+  .register-form-div input {
+    height: 45px;
+    width: 350px;
   }
 }
 :root {
