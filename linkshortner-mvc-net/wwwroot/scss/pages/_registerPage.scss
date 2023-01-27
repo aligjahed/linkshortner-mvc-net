@@ -1,0 +1,38 @@
+.register {
+  padding: 24px;
+  &-header {
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-md){
+  .register{
+    padding: 64px;
+
+    &-header {
+      h1 {
+        font-size: 48px;
+      }
+
+      p {
+        font-size: 24px;
+      }
+    }
+
+    &-form-div{
+      label {
+        font-size: 24px;
+      }
+  
+      input {
+        height: 45px;
+        width: 350px;
+      }
+    }
+  }
+
+
+}
