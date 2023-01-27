@@ -1,0 +1,42 @@
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+
+<div class="d-flex w-100 h-100 flex-column align-items-center login">
+    <div class="text-center login-header pb-4 mb-md-5">
+        <h1>Login</h1>
+        <p>Login to LinkShortner using your email or password</p>
+    </div>
+    <div class="row row-cols-lg-auto justify-content-around w-100">
+        <section class="mb-4 form-sec">
+            <form id="EmailLoginForm" asp-action="Login" asp-controller="Account">
+                <div class="mb-2 form-div">
+                    <label for="emailInput" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailInput"/>
+                </div>
+                <div class="mb-5 form-div">
+                    <label for="passwordInputEmail" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="passwordInputEmail"/>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary">Login with Email</button>
+            </form>
+        </section>
+        <section class="form-sec">
+            <form id="usernameLoginForm" asp-action="Login" asp-controller="Account">
+                <div class="mb-2 form-div">
+                    <label for="usernameInputInput" class="form-label">Username</label>
+                    <input type="email" class="form-control" id="usernameInput"/>
+                </div>
+                <div class="mb-5 form-div">
+                    <label for="passwordInputUsername" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="passwordInputUsername"/>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary ">Login with Username</button>
+            </form>
+        </section>
+    </div>
+</div>

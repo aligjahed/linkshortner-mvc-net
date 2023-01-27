@@ -2,7 +2,27 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="d-flex flex-column justify-content-center align-items-center w-100">
+    <div class="text-center home-page-header">
+        <p>Welcome to</p>
+        <h1>LinkShortner</h1>
+    </div>
+    <div class="row row-cols-lg-3 justify-content-around align-items-center w-100">
+        <div class="col-auto action-sec text-center">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <h3>Alredy an user?</h3>
+            <a href="@Url.Action("Login" , "Account")">
+                <button class="btn btn-lg btn-primary">Login</button>
+            </a>
+        </div>
+        <hr class="p-0 seperator"/>
+        <div class="col-auto action-sec text-center">
+            <i class="bi bi-person-plus-fill"></i>
+            <h3>Not a user?</h3>
+            <a href="@Url.Action("Register" , "Account")">
+                <button class="btn btn-lg btn-primary">Register</button>
+            </a>
+        </div>
+
+    </div>
 </div>

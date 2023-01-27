@@ -1,0 +1,35 @@
+@import "../scss/variables";
+@import "../scss/pages/homepage";
+@import "../scss/pages/loginPage";
+
+:root {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+p {
+  margin: 0px;
+}
+
+.main {
+  background: linear-gradient(-90deg, $main-red, $main-blue);
+  min-height: 100vh;
+  height: 100%;
+}
+
+.main-body {
+  width: 1100px;
+  height: 700px;
+  border-radius: 10px;
+  background-color: $main-grayish-white;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+@media (min-width: 750px) {
+  .main-body {
+    border-radius: 25px;
+  }
+}
