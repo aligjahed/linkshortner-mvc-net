@@ -1,4 +1,8 @@
 using linkshortner_mvc_net;
+using linkshortner_mvc_net.Data;
+using linkshortner_mvc_net.Middlewares;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,24 +12,23 @@ builder.Services.AddWebUi();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    //app.UseDeveloperExceptionPage();
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 
-app.UseAuthorization();
-app.UseAuthorization();
+app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// apply migrations at runtime
+using (var scope = app.Services.CreateScope())
+{
+    await scope.ServiceProvider.GetService<DataContext>().Database.MigrateAsync();
+}
 
 app.Run();
