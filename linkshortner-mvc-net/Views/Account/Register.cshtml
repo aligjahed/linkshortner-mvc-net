@@ -10,13 +10,28 @@
         <h1>Register</h1>
         <p>Create a new account to access LinkShortner</p>
     </div>
-    @if (!string.IsNullOrEmpty(@Model.Error))
+    @if (!string.IsNullOrEmpty(@Model.Message))
     {
-        <div class="alert alert-danger w-75 d-flex align-items-center">
-            <div class="bi bi-exclamation-triangle me-2"></div>
-            <div>
-                @Model.Error
-            </div>
+        <div class="w-75">
+            @switch (@Model.MessageType)
+            {
+                case "error" :
+                    <div class="alert alert-danger d-flex align-items-center">
+                        <div class="bi bi-exclamation-triangle me-2"></div>
+                        <div>
+                            @Model.Message
+                        </div>
+                    </div>
+                    break;
+                case "success":
+                    <div class="alert alert-success d-flex align-items-center">
+                        <div class="bi bi-check-circle me-2"></div>
+                        <div>
+                            @Model.Message
+                        </div>
+                    </div>
+                    break;
+            }
         </div>
     }
     <section class="mb-4 w-100 d-flex justify-content-center">
@@ -36,8 +51,8 @@
             <div class="row row-cols-md-auto">
                 <div class="mb-2 register-form-div">
                     <label for="passwordInput" class="form-label">Password</label>
-                    <input asp-for="Account.Password" type="password" class="form-control" id="passwordInput" required/>
-                    <div class="invalid-feedback">Please enter a password</div>
+                    <input asp-for="Account.Password" type="password" minlength="6" class="form-control" id="passwordInput" required/>
+                    <div class="invalid-feedback">Please enter a password with 8-6 numbers and/or letters</div>
                 </div>
                 <div class="mb-5 register-form-div">
                     <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
@@ -45,7 +60,7 @@
                     <div class="invalid-feedback">Please confirm your password</div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary">Login with Email</button>
+            <button type="submit" class="btn btn-lg btn-primary">Register</button>
         </form>
     </section>
     <p>Already an user? <a asp-action="Login" asp-controller="Account" class="link-primary">Login</a></p>
