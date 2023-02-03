@@ -4,68 +4,72 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="d-flex w-100 h-100 flex-column align-items-center register">
-    <div class="text-center login-header pb-4 mb-md-2">
-        <h1>Login</h1>
-        <p>Login to LinkShortner using your email/username and password</p>
-    </div>
-    @if (!string.IsNullOrEmpty(@Model.Message))
-    {
-        <div class="w-75">
-            @switch (@Model.MessageType)
+<div class="main d-flex justify-content-center align-items-center p-4">
+    <div class="main-body">
+        <div class="d-flex w-100 h-100 flex-column align-items-center register">
+            <div class="text-center login-header pb-4 mb-md-2">
+                <h1>Login</h1>
+                <p>Login to LinkShortner using your email/username and password</p>
+            </div>
+            @if (!string.IsNullOrEmpty(@Model.Message))
             {
-                case "error":
-                    <div class="alert alert-danger d-flex align-items-center">
-                        <div class="bi bi-exclamation-triangle me-2"></div>
-                        <div>
-                            @Model.Message
-                        </div>
-                    </div>
-                    break;
-                case "success":
-                    <div class="alert alert-success d-flex align-items-center">
-                        <div class="bi bi-check-circle me-2"></div>
-                        <div>
-                            @Model.Message
-                        </div>
-                    </div>
-                    break;
+                <div class="w-75">
+                    @switch (@Model.MessageType)
+                    {
+                        case "error":
+                            <div class="alert alert-danger d-flex align-items-center">
+                                <div class="bi bi-exclamation-triangle me-2"></div>
+                                <div>
+                                    @Model.Message
+                                </div>
+                            </div>
+                            break;
+                        case "success":
+                            <div class="alert alert-success d-flex align-items-center">
+                                <div class="bi bi-check-circle me-2"></div>
+                                <div>
+                                    @Model.Message
+                                </div>
+                            </div>
+                            break;
+                    }
+                </div>
             }
+            <div class="row row-cols-lg-auto justify-content-around w-100 mb-5">
+                <section class="mb-4 form-sec">
+                    <form name="EmailLoginForm" method="post" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
+                        <div class="mb-2 form-div">
+                            <label asp-for="Account.Email" for="emailInput" class="form-label">Email</label>
+                            <input asp-for="Account.Email" type="email" class="form-control" id="emailInput" required/>
+                            <div class="invalid-feedback">Please enter a your email</div>
+                        </div>
+                        <div class="mb-5 form-div">
+                            <label asp-for="Account.Password" for="passwordInputEmail" class="form-label">Password</label>
+                            <input asp-for="Account.Password" type="password" class="form-control" id="passwordInputEmail" required/>
+                            <div class="invalid-feedback">Please enter a password</div>
+                        </div>
+                        @* <input id="EmailLoginFormMethod" class="visually-hidden" asp-for="Account.IsLoginMethodEmail" value="true"/> *@
+                        <button id="EmailLoginFormSubmit" type="submit" class="btn btn-lg btn-primary">Login with Email</button>
+                    </form>
+                </section>
+                <section class="form-sec">
+                    <form name="UsernameLogin" method="post" id="usernameLoginForm" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
+                        <div class="mb-2 form-div">
+                            <label asp-for="Account.Username" for="usernameInputInput" class="form-label">Username</label>
+                            <input asp-for="Account.Username" type="text" class="form-control" id="usernameInput" required/>
+                            <div class="invalid-feedback">Please enter your username</div>
+                        </div>
+                        <div class="mb-5 form-div">
+                            <label asp-for="Account.Password" for="passwordInputUsername" class="form-label">Password</label>
+                            <input asp-for="Account.Password" type="password" class="form-control" id="passwordInputUsername" required/>
+                            <div class="invalid-feedback">Please enter a password</div>
+                        </div>
+                        <input id="UsernameLoginFormMethod" class="visually-hidden" asp-for="Account.IsLoginMethodEmail" value="false"/>
+                        <button id="UsernameLoginFormSubmit" type="submit" class="btn btn-lg btn-primary ">Login with Username</button>
+                    </form>
+                </section>
+            </div>
+            <p>Not a user? <a asp-action="Register" asp-controller="Account" class="link-primary">Register</a></p>
         </div>
-    }
-    <div class="row row-cols-lg-auto justify-content-around w-100 mb-5">
-        <section class="mb-4 form-sec">
-            <form name="EmailLoginForm" method="post" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
-                <div class="mb-2 form-div">
-                    <label asp-for="Account.Email" for="emailInput" class="form-label">Email</label>
-                    <input asp-for="Account.Email" type="email" class="form-control" id="emailInput" required/>
-                    <div class="invalid-feedback">Please enter a your email</div>
-                </div>
-                <div class="mb-5 form-div">
-                    <label asp-for="Account.Password" for="passwordInputEmail" class="form-label">Password</label>
-                    <input asp-for="Account.Password" type="password" class="form-control" id="passwordInputEmail" required/>
-                    <div class="invalid-feedback">Please enter a password</div>
-                </div>
-                @* <input id="EmailLoginFormMethod" class="visually-hidden" asp-for="Account.IsLoginMethodEmail" value="true"/> *@
-                <button id="EmailLoginFormSubmit" type="submit" class="btn btn-lg btn-primary">Login with Email</button>
-            </form>
-        </section>
-        <section class="form-sec">
-            <form name="UsernameLogin" method="post" id="usernameLoginForm" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
-                <div class="mb-2 form-div">
-                    <label asp-for="Account.Username" for="usernameInputInput" class="form-label">Username</label>
-                    <input asp-for="Account.Username" type="text" class="form-control" id="usernameInput" required/>
-                    <div class="invalid-feedback">Please enter your username</div>
-                </div>
-                <div class="mb-5 form-div">
-                    <label asp-for="Account.Password" for="passwordInputUsername" class="form-label">Password</label>
-                    <input asp-for="Account.Password" type="password" class="form-control" id="passwordInputUsername" required/>
-                    <div class="invalid-feedback">Please enter a password</div>
-                </div>
-                <input id="UsernameLoginFormMethod" class="visually-hidden" asp-for="Account.IsLoginMethodEmail" value="false"/>
-                <button id="UsernameLoginFormSubmit" type="submit" class="btn btn-lg btn-primary ">Login with Username</button>
-            </form>
-        </section>
     </div>
-    <p>Not a user? <a asp-action="Register" asp-controller="Account" class="link-primary">Register</a></p>
 </div>
