@@ -35,23 +35,23 @@
     }
     <div class="row row-cols-lg-auto justify-content-around w-100 mb-5">
         <section class="mb-4 form-sec">
-            <form method="post" id="EmailLoginForm" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
+            <form name="EmailLoginForm" method="post" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
                 <div class="mb-2 form-div">
                     <label asp-for="Account.Email" for="emailInput" class="form-label">Email</label>
-                    <input name="Email" asp-for="Account.Email" type="email" class="form-control" id="emailInput" required/>
+                    <input asp-for="Account.Email" type="email" class="form-control" id="emailInput" required/>
                     <div class="invalid-feedback">Please enter a your email</div>
                 </div>
                 <div class="mb-5 form-div">
                     <label asp-for="Account.Password" for="passwordInputEmail" class="form-label">Password</label>
-                    <input name="Password" asp-for="Account.Password" type="password" class="form-control" id="passwordInputEmail" required/>
+                    <input asp-for="Account.Password" type="password" class="form-control" id="passwordInputEmail" required/>
                     <div class="invalid-feedback">Please enter a password</div>
                 </div>
-                <input class="visually-hidden" asp-for="Account.IsLoginMethodEmail" value="true"/>
+                @* <input id="EmailLoginFormMethod" class="visually-hidden" asp-for="Account.IsLoginMethodEmail" value="true"/> *@
                 <button id="EmailLoginFormSubmit" type="submit" class="btn btn-lg btn-primary">Login with Email</button>
             </form>
         </section>
         <section class="form-sec">
-            <form id="usernameLoginForm" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
+            <form name="UsernameLogin" method="post" id="usernameLoginForm" class="needs-validation" asp-action="Login" asp-controller="Account" novalidate>
                 <div class="mb-2 form-div">
                     <label asp-for="Account.Username" for="usernameInputInput" class="form-label">Username</label>
                     <input asp-for="Account.Username" type="text" class="form-control" id="usernameInput" required/>
@@ -62,7 +62,7 @@
                     <input asp-for="Account.Password" type="password" class="form-control" id="passwordInputUsername" required/>
                     <div class="invalid-feedback">Please enter a password</div>
                 </div>
-                <input class="visually-hidden" asp-for="Account.IsLoginMethodEmail" value="false"/>
+                <input id="UsernameLoginFormMethod" class="visually-hidden" asp-for="Account.IsLoginMethodEmail" value="false"/>
                 <button id="UsernameLoginFormSubmit" type="submit" class="btn btn-lg btn-primary ">Login with Username</button>
             </form>
         </section>

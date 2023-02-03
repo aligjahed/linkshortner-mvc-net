@@ -36,13 +36,18 @@ public class LoginQueryHandler : AsyncRequestHandler<LoginQuery>
         var httpContext = _httpContextAccessor.HttpContext;
         var loginData = request.loginData;
 
+        // Check if a user has already signed in
+        if (httpContext.User.Identity.IsAuthenticated)
+            throw new UserIsAlreadyLoggedInException("A User is already logged in. Sign out first");
+
+        // Check if a username or email exist
         if (string.IsNullOrEmpty(request.loginData.Email) && string.IsNullOrEmpty(request.loginData.Username))
-        {
             throw new NullEmailAndUsernameException("Please provide an email or an username");
-        }
+
 
         User? reqUser = null;
 
+        // Find user data from database according to login method
         if (loginData.IsLoginMethodEmail)
         {
             reqUser = await _context.Users.FirstOrDefaultAsync(x => x.Email == loginData.Email);
@@ -52,11 +57,12 @@ public class LoginQueryHandler : AsyncRequestHandler<LoginQuery>
             reqUser = await _context.Users.FirstOrDefaultAsync(x => x.Username == loginData.Username);
         }
 
+        // Throw exception if user with provided credentials doesn't exist
         if (reqUser is null)
-        {
             throw new UserDoesNotExistException("User with provided email or username does not exists.");
-        }
+        
 
+        // Check hashed password from requested user to provided password
         var passwordVerificationResult =
             _passwordHasher.VerifyHashedPassword(reqUser, reqUser.PasswordHash, loginData.Password);
 
@@ -82,6 +88,7 @@ public class LoginQueryHandler : AsyncRequestHandler<LoginQuery>
                 ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
             };
 
+            // Signin user with provided data
             await httpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),

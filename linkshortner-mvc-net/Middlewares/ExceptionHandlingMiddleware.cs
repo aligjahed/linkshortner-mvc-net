@@ -39,6 +39,10 @@ public class ExceptionHandlingMiddleware : IMiddleware
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
                     response.Redirect($"{redirectUrl}/?message={e.Message}&messageType=error");
                     break;
+                case UserIsAlreadyLoggedInException e:
+                    response.StatusCode = (int)HttpStatusCode.Conflict;
+                    response.Redirect($"{redirectUrl}/?message={e.Message}&messageType=error");
+                    break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;           
                     // response.Redirect("/error");
