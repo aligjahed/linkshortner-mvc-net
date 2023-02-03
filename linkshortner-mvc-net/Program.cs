@@ -16,10 +16,10 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
