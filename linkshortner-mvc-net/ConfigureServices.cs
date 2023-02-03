@@ -16,11 +16,12 @@ public static class ConfigureServices
     {
         services.AddControllersWithViews();
         services.AddHttpContextAccessor();
-        services.AddAuthentication().AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
+        services.AddMediatR(Assembly.GetExecutingAssembly());
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
         services.AddDbContext<DataContext>();
         services.AddSingleton<ExceptionHandlingMiddleware>();
         services.AddScoped<PasswordHasher<User>>();
-        services.AddMediatR(Assembly.GetExecutingAssembly());
         return services;
     }
 }

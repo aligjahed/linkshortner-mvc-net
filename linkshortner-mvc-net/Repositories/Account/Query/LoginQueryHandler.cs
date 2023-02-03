@@ -54,7 +54,7 @@ public class LoginQueryHandler : AsyncRequestHandler<LoginQuery>
 
         if (reqUser is null)
         {
-            throw new UserDoesNotExistException("User with provided email does not exists.");
+            throw new UserDoesNotExistException("User with provided email or username does not exists.");
         }
 
         var passwordVerificationResult =
@@ -79,24 +79,13 @@ public class LoginQueryHandler : AsyncRequestHandler<LoginQuery>
             var properties = new AuthenticationProperties()
             {
                 IsPersistent = true,
-                AllowRefresh = true,
                 ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
             };
 
-            try
-            {
-                await httpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity),
-                    properties);
-            }
-            catch (Exception e)
-            {
-            }
-            finally
-            {
-                _logger.LogInformation(httpContext.User.Identity.IsAuthenticated.ToString());
-            }
+            await httpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                properties);
         }
     }
 }

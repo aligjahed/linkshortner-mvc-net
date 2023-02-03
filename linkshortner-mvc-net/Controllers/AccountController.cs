@@ -38,6 +38,8 @@ public class AccountController : Controller
     {
         //string? test = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
 
+        await _mediatr.Send(new LoginQuery { loginData = loginData.Account });
+
         return RedirectToAction("Index", "Home",
             new { message = User.Identity.Name, messageType = "success" });
     }
