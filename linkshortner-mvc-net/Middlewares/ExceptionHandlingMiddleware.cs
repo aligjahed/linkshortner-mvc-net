@@ -46,7 +46,7 @@ public class ExceptionHandlingMiddleware : IMiddleware
                 default:
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;           
                     // response.Redirect("/error");
-                    response.WriteAsJsonAsync(exception.StackTrace);
+                    response.WriteAsJsonAsync(exception.Message);
                     break;
             }
         }

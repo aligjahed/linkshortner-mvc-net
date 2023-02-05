@@ -257,4 +257,8 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\scss\_variables.scss" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Repositories\App\Command" />
+    </ItemGroup>
+
 </Project>
