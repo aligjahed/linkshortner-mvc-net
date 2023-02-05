@@ -1,0 +1,74 @@
+@model AppViewModel
+
+@{
+    ViewData["Title"] = "App";
+}
+
+<div class="row vh-100">
+    <section class="col-3 bg-primary menu-sec d-flex flex-column align-items-center">
+        <h1 class="text-white">LinkShortner</h1>
+        <div>
+            <a class="d-flex align-items-center justify-content-start text-white rounded-4 p-4 menu-btn menu-btn-selected">
+                <i class="bi bi-house"></i>
+                <h3>Home</h3>
+            </a>
+            <a asp-action="Profile" asp-controller="App" class="d-flex align-items-center justify-content-start text-white rounded-4 p-4 menu-btn">
+                <i class="bi bi-person"></i>
+                <h3>Profile</h3>
+            </a>
+        </div>
+    </section>
+    <section class="col-xl-9 p-5 d-flex flex-column ">
+        <div class="d-flex justify-content-between align-items-center w-100 mb-3 text-primary">
+            <h2 class="fs-1">Your Links</h2>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#addLinkCollapse" aria-expanded="false" aria-controls="addLinkCollapse">
+                Add Link
+            </button>
+        </div>
+        <p class="fw-semibold mb-5">You can use shortned url to access origin</p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+          </div>
+        </div>
+        @if (@Model.Urls.Count > 0)
+        {
+            <div class="d-flex w-100 justify-content-between fw-bold overflow-auto link-sec-main">
+                <div class="list-group list-group-flush">
+                    <p>Origin</p>
+                    @foreach (var Link in @Model.Urls)
+                    {
+                        <li class="list-group-item text-primary ">@Link.OriginUrl</li>
+                    }
+                </div>
+                <div class="list-group list-group-flush">
+                    <p>Shortned Url</p>
+                    @foreach (var Link in @Model.Urls)
+                    {
+                        <li class="list-group-item text-primary ">@Link.RedirectUrl</li>
+                    }
+                </div>
+                <div class="list-group list-group-flush">
+                    <p>Redirect Count</p>
+                    @foreach (var Link in @Model.Urls)
+                    {
+                        <li class="list-group-item text-primary ">@Link.RedirectCount</li>
+                    }
+                </div>
+                <div class="list-group list-group-flush">
+                    <p>Actions</p>
+                    @foreach (var Link in @Model.Urls)
+                    {
+                        <li class="list-group-item">
+                            <a class="bi bi-trash" href="@Url.Action("RemoveUrl", "App", new { urlId = @Link.Id })"></a>
+                        </li>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>There's no link yet</p>
+        }
+    </section>
+</div>
