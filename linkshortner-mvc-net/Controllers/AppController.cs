@@ -21,6 +21,7 @@ public class AppController : Controller
         _logger = logger;
     }
     
+    [Route("/App")]
     public async Task<IActionResult> Index()
     {
         var viewModel = new AppViewModel();
@@ -33,10 +34,5 @@ public class AppController : Controller
     public IActionResult Profile()
     {
         return View();
-    }
-
-    public IActionResult RemoveUrl(string urlId)
-    {
-        throw new NotImplementedException();
     }
 }

@@ -3,6 +3,6 @@ using MediatR;
 
 namespace linkshortner_mvc_net.Repositories.App.Query;
 
-public class GetAllUrlsQuery : IRequest<List<Url>>
+public class GetAllUrlsQuery : IRequest<List<Entities.Url>>
 {
 }

@@ -43,10 +43,22 @@ public class ExceptionHandlingMiddleware : IMiddleware
                     response.StatusCode = (int)HttpStatusCode.Conflict;
                     response.Redirect($"{redirectUrl}/?message={e.Message}&messageType=error");
                     break;
+                case UrlDoesNotExistException e :
+                    response.StatusCode = (int)HttpStatusCode.NotFound;
+                    response.Redirect($"App/?message={e.Message}&messageType=error");
+                    break;
+                case UnauthorizedRequestException e:
+                    response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    response.Redirect($"{redirectUrl}/?message={e.Message}&messageType=error");
+                    break;
+                case RedirectIdAlreadyExistException e:
+                    response.StatusCode = (int)HttpStatusCode.Conflict;
+                    response.Redirect($"/App/?message={e.Message}&messageType=error");
+                    break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;           
                     // response.Redirect("/error");
-                    response.WriteAsJsonAsync(exception.Message);
+                    response.WriteAsJsonAsync(exception);
                     break;
             }
         }

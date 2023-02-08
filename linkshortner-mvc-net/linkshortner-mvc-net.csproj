@@ -259,6 +259,7 @@
 
     <ItemGroup>
       <Folder Include="Repositories\App\Command" />
+      <Folder Include="Repositories\App\Query" />
     </ItemGroup>
 
 </Project>

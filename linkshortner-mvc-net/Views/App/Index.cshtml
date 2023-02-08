@@ -19,21 +19,11 @@
         </div>
     </section>
     <section class="col-xl-9 p-5 d-flex flex-column ">
-        <div class="d-flex justify-content-between align-items-center w-100 mb-3 text-primary">
-            <h2 class="fs-1">Your Links</h2>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#addLinkCollapse" aria-expanded="false" aria-controls="addLinkCollapse">
-                Add Link
-            </button>
-        </div>
-        <p class="fw-semibold mb-5">You can use shortned url to access origin</p>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-          </div>
-        </div>
+        <h2 class="fs-1 text-primary">Your Links</h2>
+        <p class="fw-semibold mb-4">You can use shortned url to access origin</p>
         @if (@Model.Urls.Count > 0)
         {
-            <div class="d-flex w-100 justify-content-between fw-bold overflow-auto link-sec-main">
+            <div class="d-flex w-100 justify-content-between fw-bold overflow-auto link-sec-main mb-4">
                 <div class="list-group list-group-flush">
                     <p>Origin</p>
                     @foreach (var Link in @Model.Urls)
@@ -45,7 +35,7 @@
                     <p>Shortned Url</p>
                     @foreach (var Link in @Model.Urls)
                     {
-                        <li class="list-group-item text-primary ">@Link.RedirectUrl</li>
+                        <li class="list-group-item text-primary ">https://linkshortner-mvc-net.iran.liara.run/@Link.RedirectUrl</li>
                     }
                 </div>
                 <div class="list-group list-group-flush">
@@ -60,7 +50,7 @@
                     @foreach (var Link in @Model.Urls)
                     {
                         <li class="list-group-item">
-                            <a class="bi bi-trash" href="@Url.Action("RemoveUrl", "App", new { urlId = @Link.Id })"></a>
+                            <a class="bi bi-trash" href="@Url.Action("Remove", "Url" , new {urlId = @Link.Id})"></a>
                         </li>
                     }
                 </div>
@@ -68,7 +58,21 @@
         }
         else
         {
-            <p>There's no link yet</p>
+            <p>There are no links yet</p>
         }
+        <h2 class="fs-1 text-primary">Add new link</h2>
+        <form class="mb-3 needs-validation" method="post" asp-action="Add" asp-controller="Url" novalidate>
+            <div class="">
+                <label class="form-label">Origin Url</label>
+                <input asp-for="NewLink.OriginUrl" type="text" class="form-control" placeholder="Your original website url. Something like google.com" required/>
+                <div class="invalid-feedback">Please enter a valid url</div>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Redirect Url</label>
+                <input asp-for="NewLink.RedirectUrl" type="text" class="form-control" placeholder="Your custome url id. Should not contain any domain. something like ggl" required/>
+                <div class="invalid-feedback">Please enter a valid url</div>
+            </div>
+            <button class="btn btn-lg btn-primary " type="submit">Add</button>
+        </form>
     </section>
 </div>
