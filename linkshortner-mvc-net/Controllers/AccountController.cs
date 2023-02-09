@@ -66,8 +66,23 @@ public class AccountController : Controller
             new { message = "Account created Successfully. Please login", messageType = "success" });
     }
 
-    public IActionResult Logout()
+    public async Task<IActionResult> Logout()
     {
-        return View();
+        await _mediatr.Send(new LogoutCommand());
+        return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ChangePassword(ProfileViewModel profileViewModel)
+    {
+        var changePasswordDto = profileViewModel.ChangePasswordData;
+
+        if (changePasswordDto.newPassword != changePasswordDto.newPasswordConfirmation)
+            throw new PasswordsDoNotMatchException("Entered password do not match");
+
+        await _mediatr.Send(new ChangePasswordCommand() { ChangePasswordData = changePasswordDto });
+
+        return RedirectToAction("Profile", "App",
+            new { message = "Password Changed successfully", messageType = "success" });
     }
 }
