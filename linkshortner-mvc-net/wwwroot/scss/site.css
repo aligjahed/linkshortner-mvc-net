@@ -127,7 +127,6 @@
 }
 .menu-sec {
   padding: 72px;
-  display: none !important;
 }
 .menu-sec h1 {
   font-size: 48px;
@@ -136,13 +135,13 @@
 }
 
 .menu-btn {
-  height: 72px;
-  width: 280px;
+  height: 48px;
+  width: 150px;
   margin-bottom: 24px;
 }
 .menu-btn i {
-  font-size: 40px;
-  margin-right: 15px;
+  font-size: 24px;
+  margin-right: 8px;
 }
 .menu-btn h3 {
   margin: 0;
@@ -165,8 +164,22 @@
 }
 
 @media (min-width: 1200px) {
-  .menu-sec {
-    display: flex !important;
+  .menu-btn {
+    height: 72px;
+    width: 280px;
+    margin-bottom: 24px;
+  }
+  .menu-btn i {
+    font-size: 40px;
+    margin-right: 15px;
+  }
+  .menu-btn h3 {
+    margin: 0;
+  }
+  .menu-btn-selected {
+    color: #D90429 !important;
+    background: white;
+    padding: 10px;
   }
 }
 :root {

@@ -2,7 +2,7 @@
 
 .menu-sec {
   padding: 72px;
-  display: none !important;
+  
   h1 {
     font-size: 48px;
     font-weight: 700;
@@ -11,13 +11,13 @@
 }
 
 .menu-btn {
-  height: 72px;
-  width: 280px;
+  height: 48px;
+  width: 150px;
   margin-bottom: 24px;
   
   i {
-    font-size: 40px;
-    margin-right: 15px;
+    font-size: 24px;
+    margin-right: 8px;
   }
   
   h3 {
@@ -46,7 +46,26 @@
 }
 
 @media (min-width: 1200px){
-  .menu-sec{
-    display: flex !important;
+  .menu-btn {
+    height: 72px;
+    width: 280px;
+    margin-bottom: 24px;
+
+    i {
+      font-size: 40px;
+      margin-right: 15px;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    &-selected {
+      color: $main-red !important;
+      background: white;
+      padding: 10px;
+    }
   }
+  
+  
 }

@@ -4,79 +4,94 @@
     ViewData["Title"] = "Profile";
 }
 
-<div class="row vh-100">
-    <section class="col-3 bg-primary menu-sec d-flex flex-column align-items-center">
+<div class="row vh-100 overflow-auto">
+    <section class="col-3 bg-primary menu-sec d-none d-lg-flex flex-column align-items-center">
         <h1 class="text-white">LinkShortner</h1>
         <div>
             <a asp-action="Index" asp-controller="App" class="d-flex align-items-center justify-content-start text-white rounded-4 p-4 menu-btn">
                 <i class="bi bi-house"></i>
                 <h3>Home</h3>
             </a>
-            <a class="d-flex align-items-center justify-content-start text-white rounded-4 p-4 menu-btn menu-btn-selected">
+            <div class="d-flex align-items-center justify-content-start text-white rounded-4 p-4 menu-btn menu-btn-selected">
                 <i class="bi bi-person"></i>
                 <h3>Profile</h3>
-            </a>
+            </div>
         </div>
     </section>
-    <section class="col-xl-9 p-5 d-flex flex-column ">
-        @if (!string.IsNullOrEmpty(@Model.Message))
-        {
-            <div class="w-75">
-                @switch (@Model.MessageType)
-                {
-                    case "error":
-                        <div class="alert alert-danger d-flex align-items-center">
-                            <div class="bi bi-exclamation-triangle me-2"></div>
-                            <div>
-                                @Model.Message
-                            </div>
-                        </div>
-                        break;
-                    case "success":
-                        <div class="alert alert-success d-flex align-items-center">
-                            <div class="bi bi-check-circle me-2"></div>
-                            <div>
-                                @Model.Message
-                            </div>
-                        </div>
-                        break;
-                }
-            </div>
-        }
-        <div>
-            <h2>Profile</h2>
-            <hr/>
-            <div class="mb-2">
-                <label class="form-label">Email</label>
-                <input class="form-control" value="@Model.User.Email" disabled readonly/>
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Username</label>
-                <input class="form-control" value="@Model.User.Username" disabled readonly/>
-            </div>
-            <p class="mb-3">Your account was created at @Model.User.CreatedAt</p>
-            <div class="row row-cols-auto">
-                <a asp-action="Logout" asp-controller="Account" class="btn btn-outline-primary mx-3">Logout</a>
+    <section class="col-xl-9 p-lg-5 d-flex flex-column ">
+        <div class="p-4 bg-primary d-lg-none">
+            <h1 class="text-center text-white fw-bold fs-1 mb-5">LinkShortner</h1>
+            <div class="row row-cols-auto d-flex align-items-center justify-content-center">
+                <a asp-action="Index" asp-controller="App" class="d-flex align-items-center justify-content-center p-3 rounded-4 menu-btn text-white">
+                    <i class="bi bi-house"></i>
+                    <h3 class="m-0">Home</h3>
+                </a>
+                <div class="d-flex align-items-center justify-content-center p-3 rounded-4 menu-btn text-white menu-btn-selected">
+                    <i class="bi bi-person"></i>
+                    <h3 class="m-0">Profile</h3>
+                </div>
             </div>
         </div>
-        <hr/>
-        <div>
-            <h2>Change Password</h2>
-            <form asp-action="ChangePassword" asp-controller="Account" id="changePasswordForm">
+        <div class="p-4">
+            @if (!string.IsNullOrEmpty(@Model.Message))
+            {
+                <div class="w-75">
+                    @switch (@Model.MessageType)
+                    {
+                        case "error":
+                            <div class="alert alert-danger d-flex align-items-center">
+                                <div class="bi bi-exclamation-triangle me-2"></div>
+                                <div>
+                                    @Model.Message
+                                </div>
+                            </div>
+                            break;
+                        case "success":
+                            <div class="alert alert-success d-flex align-items-center">
+                                <div class="bi bi-check-circle me-2"></div>
+                                <div>
+                                    @Model.Message
+                                </div>
+                            </div>
+                            break;
+                    }
+                </div>
+            }
+            <div>
+                <h2>Profile</h2>
+                <hr/>
                 <div class="mb-2">
-                    <label class="form-label">Current Password</label>
-                    <input asp-for="ChangePasswordData.currentPassword" class="form-control" type="password" placeholder="Current Password"/>
+                    <label class="form-label">Email</label>
+                    <input class="form-control" value="@Model.User.Email" disabled readonly/>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label">New Password</label>
-                    <input asp-for="ChangePasswordData.newPassword" class="form-control" type="password" placeholder="New Password"/>
+                    <label class="form-label">Username</label>
+                    <input class="form-control" value="@Model.User.Username" disabled readonly/>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Confirm New Password</label>
-                    <input asp-for="ChangePasswordData.newPasswordConfirmation" class="form-control" type="password" placeholder="Confirm New Password"/>
+                <p class="mb-3">Your account was created at @Model.User.CreatedAt</p>
+                <div class="row row-cols-auto">
+                    <a asp-action="Logout" asp-controller="Account" class="btn btn-outline-primary mx-3">Logout</a>
                 </div>
-                <button class="btn btn-primary" type="submit">Change password</button>
-            </form>
+            </div>
+            <hr/>
+            <div>
+                <h2>Change Password</h2>
+                <form asp-action="ChangePassword" asp-controller="Account" id="changePasswordForm">
+                    <div class="mb-2">
+                        <label class="form-label">Current Password</label>
+                        <input asp-for="ChangePasswordData.currentPassword" class="form-control" type="password" placeholder="Current Password"/>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">New Password</label>
+                        <input asp-for="ChangePasswordData.newPassword" class="form-control" type="password" placeholder="New Password"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirm New Password</label>
+                        <input asp-for="ChangePasswordData.newPasswordConfirmation" class="form-control" type="password" placeholder="Confirm New Password"/>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Change password</button>
+                </form>
+            </div>
         </div>
     </section>
 </div>
