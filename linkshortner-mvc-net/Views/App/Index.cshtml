@@ -4,8 +4,8 @@
     ViewData["Title"] = "App";
 }
 
-<div class="row vh-100">
-    <section class="col-3 bg-primary menu-sec d-flex flex-column align-items-center">
+<div class="row vh-100 overflow-auto">
+    <section class="col-3 bg-primary menu-sec d-flex flex-column align-items-center d-none d-lg-flex">
         <h1 class="text-white">LinkShortner</h1>
         <div>
             <a class="d-flex align-items-center justify-content-start text-white rounded-4 p-4 menu-btn menu-btn-selected">
@@ -18,61 +18,76 @@
             </a>
         </div>
     </section>
-    <section class="col-xl-9 p-5 d-flex flex-column ">
-        <h2 class="fs-1 text-primary">Your Links</h2>
-        <p class="fw-semibold mb-4">You can use shortned url to access origin</p>
-        @if (@Model.Urls.Count > 0)
-        {
-            <div class="d-flex w-100 justify-content-between fw-bold overflow-auto link-sec-main mb-4">
-                <div class="list-group list-group-flush">
-                    <p>Origin</p>
-                    @foreach (var Link in @Model.Urls)
-                    {
-                        <li class="list-group-item text-primary ">@Link.OriginUrl</li>
-                    }
+    <section class="col-xl-9 p-lg-5 d-flex flex-column px-0 ">
+        <div class="p-4 bg-primary d-lg-none">
+            <h1 class="text-center text-white fw-bold fs-1 mb-5">LinkShortner</h1>
+            <div class="row row-cols-auto d-flex align-items-center justify-content-center">
+                <div class="d-flex align-items-center justify-content-center p-3 rounded-4 menu-btn menu-btn-selected">
+                    <i class="bi bi-house"></i>
+                    <h3 class="m-0">Home</h3>
                 </div>
-                <div class="list-group list-group-flush">
-                    <p>Shortned Url</p>
-                    @foreach (var Link in @Model.Urls)
-                    {
-                        <li class="list-group-item text-primary ">https://linkshortner-mvc-net.iran.liara.run/@Link.RedirectUrl</li>
-                    }
-                </div>
-                <div class="list-group list-group-flush">
-                    <p>Redirect Count</p>
-                    @foreach (var Link in @Model.Urls)
-                    {
-                        <li class="list-group-item text-primary ">@Link.RedirectCount</li>
-                    }
-                </div>
-                <div class="list-group list-group-flush">
-                    <p>Actions</p>
-                    @foreach (var Link in @Model.Urls)
-                    {
-                        <li class="list-group-item">
-                            <a class="bi bi-trash" href="@Url.Action("Remove", "Url" , new {urlId = @Link.Id})"></a>
-                        </li>
-                    }
-                </div>
+                <a asp-action="Profile" asp-controller="App" class="d-flex align-items-center justify-content-center p-3 rounded-4 menu-btn text-white">
+                    <i class="bi bi-person"></i>
+                    <h3 class="m-0">Profile</h3>
+                </a>
             </div>
-        }
-        else
-        {
-            <p>There are no links yet</p>
-        }
-        <h2 class="fs-1 text-primary">Add new link</h2>
-        <form class="mb-3 needs-validation" method="post" asp-action="Add" asp-controller="Url" novalidate>
-            <div class="">
-                <label class="form-label">Origin Url</label>
-                <input asp-for="NewLink.OriginUrl" type="text" class="form-control" placeholder="Your original website url. Something like google.com" required/>
-                <div class="invalid-feedback">Please enter a valid url</div>
-            </div>
-            <div class="mb-4">
-                <label class="form-label">Redirect Url</label>
-                <input asp-for="NewLink.RedirectUrl" type="text" class="form-control" placeholder="Your custome url id. Should not contain any domain. something like ggl" required/>
-                <div class="invalid-feedback">Please enter a valid url</div>
-            </div>
-            <button class="btn btn-lg btn-primary " type="submit">Add</button>
-        </form>
+        </div>
+        <div class="p-4">
+            <h2 class="fs-1 text-primary">Your Links</h2>
+            <p class="fw-semibold mb-4">You can use shortned url to access origin</p>
+            @if (@Model.Urls.Count > 0)
+            {
+                <div class="d-flex w-100 justify-content-between fw-bold overflow-auto link-sec-main mb-4">
+                    <div class="list-group list-group-flush">
+                        <p>Origin</p>
+                        @foreach (var Link in @Model.Urls)
+                        {
+                            <li class="list-group-item text-primary ">@Link.OriginUrl</li>
+                        }
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <p>Shortned Url</p>
+                        @foreach (var Link in @Model.Urls)
+                        {
+                            <li class="list-group-item text-primary ">https://linkshortner-mvc-net.iran.liara.run/@Link.RedirectUrl</li>
+                        }
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <p>Redirect Count</p>
+                        @foreach (var Link in @Model.Urls)
+                        {
+                            <li class="list-group-item text-primary ">@Link.RedirectCount</li>
+                        }
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <p>Actions</p>
+                        @foreach (var Link in @Model.Urls)
+                        {
+                            <li class="list-group-item">
+                                <a class="bi bi-trash" href="@Url.Action("Remove", "Url", new { urlId = @Link.Id })"></a>
+                            </li>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>There are no links yet</p>
+            }
+            <h2 class="fs-1 text-primary">Add new link</h2>
+            <form class="mb-3 needs-validation" method="post" asp-action="Add" asp-controller="Url" novalidate>
+                <div class="">
+                    <label class="form-label">Origin Url</label>
+                    <input asp-for="NewLink.OriginUrl" type="text" class="form-control" placeholder="Your original website url. Something like google.com" required/>
+                    <div class="invalid-feedback">Please enter a valid url</div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Redirect Url</label>
+                    <input asp-for="NewLink.RedirectUrl" type="text" class="form-control" placeholder="Your custome url id. Should not contain any domain. something like ggl" required/>
+                    <div class="invalid-feedback">Please enter a valid url</div>
+                </div>
+                <button class="btn btn-lg btn-primary " type="submit">Add</button>
+            </form>
+        </div>
     </section>
 </div>

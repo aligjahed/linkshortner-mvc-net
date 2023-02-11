@@ -23,7 +23,7 @@ public class GetUserQueryHandler : IRequestHandler<GetUserQuery, User>
     {
         var currentUserId = _httpContextAccessor.HttpContext.User.Identity.Name;
 
-        var currentUser = await _context.Users
+        var currentUser = await _context.LinkshortnerUsers
             .FirstAsync(x => x.Id.ToString() == currentUserId);
 
         return currentUser;

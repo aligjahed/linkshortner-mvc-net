@@ -29,12 +29,10 @@ public class DataContext : DbContext, IDataContext
         base.OnConfiguring(options);
 
         // var connectionString = _configuration.GetConnectionString("MySQL");
-        var connectionString = "Server=localhost;Database=LinkShortner;Port=3306;Uid=aligjahed;Pwd=Ali.1234";
-        options
-            .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+
     }
 
 
-    public DbSet<User> Users { get; set; }
-    public DbSet<Url> Urls { get; set; }
+    public DbSet<User> LinkshortnerUsers { get; set; }
+    public DbSet<Url> LinkshortnerUrls { get; set; }
 }

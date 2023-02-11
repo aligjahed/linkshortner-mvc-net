@@ -25,9 +25,9 @@ public class AddUrlCommandHandler : AsyncRequestHandler<AddUrlCommand>
 
         // Get current user
         var currentUserId = _httpContextAccessor.HttpContext.User.Identity.Name;
-        var currentUser = await _context.Users.FirstOrDefaultAsync(x => x.Id.ToString() == currentUserId);
+        var currentUser = await _context.LinkshortnerUsers.FirstOrDefaultAsync(x => x.Id.ToString() == currentUserId);
 
-        var checkUrlExist = await _context.Urls.FirstOrDefaultAsync(x => x.RedirectUrl == reqUrl.RedirectUrl);
+        var checkUrlExist = await _context.LinkshortnerUrls.FirstOrDefaultAsync(x => x.RedirectUrl == reqUrl.RedirectUrl);
 
         if (checkUrlExist is not null)
             throw new RedirectIdAlreadyExistException("The redirect url is already taken.");
@@ -45,7 +45,7 @@ public class AddUrlCommandHandler : AsyncRequestHandler<AddUrlCommand>
             User = currentUser
         };
 
-        await _context.Urls.AddAsync(newLink);
+        await _context.LinkshortnerUrls.AddAsync(newLink);
         await _context.SaveChangesAsync();
     }
 }

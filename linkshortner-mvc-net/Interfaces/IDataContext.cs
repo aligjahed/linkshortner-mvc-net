@@ -5,6 +5,6 @@ namespace linkshortner_mvc_net.Interfaces;
 
 public interface IDataContext
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Url> Urls { get; set; }
+    public DbSet<User> LinkshortnerUsers { get; set; }
+    public DbSet<Url> LinkshortnerUrls { get; set; }
 }

@@ -20,7 +20,7 @@ public class GetRedirectIdQueryHandler : IRequestHandler<GetRedirectIdQuery , st
     
     public async Task<string> Handle(GetRedirectIdQuery request, CancellationToken cancellationToken)
     {
-        var reqUrl = await _context.Urls
+        var reqUrl = await _context.LinkshortnerUrls
             .FirstAsync(x => x.RedirectUrl == request.reqID);
 
         reqUrl.RedirectCount += 1;

@@ -50,11 +50,11 @@ public class LoginQueryHandler : AsyncRequestHandler<LoginQuery>
         // Find user data from database according to login method
         if (loginData.IsLoginMethodEmail)
         {
-            reqUser = await _context.Users.FirstOrDefaultAsync(x => x.Email == loginData.Email);
+            reqUser = await _context.LinkshortnerUsers.FirstOrDefaultAsync(x => x.Email == loginData.Email);
         }
         else
         {
-            reqUser = await _context.Users.FirstOrDefaultAsync(x => x.Username == loginData.Username);
+            reqUser = await _context.LinkshortnerUsers.FirstOrDefaultAsync(x => x.Username == loginData.Username);
         }
 
         // Throw exception if user with provided credentials doesn't exist

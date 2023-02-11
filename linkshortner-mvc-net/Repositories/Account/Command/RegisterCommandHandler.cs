@@ -25,14 +25,14 @@ public class RegisterCommandHandler : AsyncRequestHandler<RegisterCommand>
         var registerReq = request.registerData;
 
         // Check if user already exist
-        var checkUserExistence = await _context.Users.FirstOrDefaultAsync(x => x.Email == registerReq.Email);
+        var checkUserExistence = await _context.LinkshortnerUsers.FirstOrDefaultAsync(x => x.Email == registerReq.Email);
         if (checkUserExistence is not null)
         {
             throw new UserAlreadyExistException("User with same email already exist.");
         }
 
         // Check for username availability 
-        var checkUsername = await _context.Users.FirstOrDefaultAsync(x => x.Username == registerReq.Username);
+        var checkUsername = await _context.LinkshortnerUsers.FirstOrDefaultAsync(x => x.Username == registerReq.Username);
         if (checkUsername is not null)
         {
             throw new UsernameAlreadyExistException("Username is taken, try another one.");
@@ -52,7 +52,7 @@ public class RegisterCommandHandler : AsyncRequestHandler<RegisterCommand>
         newUser.PasswordHash = hashPassword;
 
         // Add user to database and save
-        await _context.Users.AddAsync(newUser);
+        await _context.LinkshortnerUsers.AddAsync(newUser);
         await _context.SaveChangesAsync();
     }
 }

@@ -26,7 +26,7 @@ public class ChangePasswordCommandHandler : AsyncRequestHandler<ChangePasswordCo
     protected override async Task Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
     {
         var currentUserId = _httpContextAccessor.HttpContext.User.Identity.Name;
-        var currentUser = await _context.Users.FirstOrDefaultAsync(x => x.Id.ToString() == currentUserId);
+        var currentUser = await _context.LinkshortnerUsers.FirstOrDefaultAsync(x => x.Id.ToString() == currentUserId);
 
         var checkPassword = _passwordHasher.VerifyHashedPassword(currentUser, currentUser.PasswordHash,
             request.ChangePasswordData.currentPassword);

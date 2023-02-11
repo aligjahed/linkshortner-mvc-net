@@ -22,7 +22,7 @@ public class RemoveUrlCommandHandler : AsyncRequestHandler<RemoveUrlCommand>
     protected override async Task Handle(RemoveUrlCommand request, CancellationToken cancellationToken)
     {
         var currentUser = _httpContextAccessor.HttpContext.User.Identity.Name;
-        var reqUrl = await _context.Urls
+        var reqUrl = await _context.LinkshortnerUrls
             .Include(x => x.User)
             .FirstOrDefaultAsync(x => x.Id.ToString() == request.UrlId);
 
@@ -32,7 +32,7 @@ public class RemoveUrlCommandHandler : AsyncRequestHandler<RemoveUrlCommand>
         if (currentUser != reqUrl.User.Id.ToString())
             throw new UnauthorizedRequestException("You are not the owner of this url");
 
-        _context.Urls.Remove(reqUrl);
+        _context.LinkshortnerUrls.Remove(reqUrl);
         await _context.SaveChangesAsync();
 
     }

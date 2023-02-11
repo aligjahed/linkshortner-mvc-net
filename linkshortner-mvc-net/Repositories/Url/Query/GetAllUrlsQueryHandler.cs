@@ -24,7 +24,7 @@ public class GetAllUrlsQueryHandler : IRequestHandler<GetAllUrlsQuery, List<Enti
     {
         var currentUser = _httpcontextAccessor.HttpContext.User.Identity.Name;
 
-        var user = await _context.Users
+        var user = await _context.LinkshortnerUsers
             .Include(x => x.Urls)
             .FirstOrDefaultAsync(x => x.Id.ToString() == currentUser);
 

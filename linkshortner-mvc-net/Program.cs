@@ -10,7 +10,41 @@ var builder = WebApplication.CreateBuilder(args);
 // All Services are inside ConfigureServices.cs
 builder.Services.AddWebUi();
 
+if (builder.Environment.IsDevelopment())
+{
+    var connectionString = "Server=localhost;Database=LinkShortner;Port=3306;Uid=aligjahed;Pwd=Ali.1234";
+    builder.Services.AddDbContext<DataContext>(options =>
+    {
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    });
+}
+else
+{
+    var MYSQLHOST = Environment.GetEnvironmentVariable("HOST");
+    var MYSQLPORT = Environment.GetEnvironmentVariable("PORT");
+    var MYSQLNAME = Environment.GetEnvironmentVariable("NAME");
+    var MYSQLUSERNAME = Environment.GetEnvironmentVariable("USERNAME");
+    var MYSQLPASSWORD = Environment.GetEnvironmentVariable("PASS");
+
+    var connectionString =
+        $"Server={MYSQLHOST};Port={MYSQLPORT};Database={MYSQLNAME};Uid={MYSQLUSERNAME};Pwd={MYSQLPASSWORD};";
+
+    try
+    {
+        builder.Services.AddDbContext<DataContext>(options =>
+        {
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        });
+    }
+    catch
+    {
+        throw new Exception($"Database Connection With {connectionString} Failed");
+    }
+}
+
 var app = builder.Build();
+
+app.Environment.IsDevelopment();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
