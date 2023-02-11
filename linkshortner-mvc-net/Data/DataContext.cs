@@ -23,16 +23,7 @@ public class DataContext : DbContext, IDataContext
         // _configuration = configuration;
         _logger = logger;
     }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-    {
-        base.OnConfiguring(options);
-
-        // var connectionString = _configuration.GetConnectionString("MySQL");
-
-    }
-
-
+    
     public DbSet<User> LinkshortnerUsers { get; set; }
     public DbSet<Url> LinkshortnerUrls { get; set; }
 }
