@@ -19,9 +19,9 @@ public static class ConfigureServices
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
-        services.AddDbContext<DataContext>();
         services.AddSingleton<ExceptionHandlingMiddleware>();
         services.AddScoped<PasswordHasher<User>>();
+
         return services;
     }
 }
