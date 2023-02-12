@@ -4,7 +4,6 @@ using linkshortner_mvc_net.Exceptions;
 using linkshortner_mvc_net.Models;
 using linkshortner_mvc_net.Repositories.Account.Command;
 using linkshortner_mvc_net.Repositories.Account.Query;
-using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
