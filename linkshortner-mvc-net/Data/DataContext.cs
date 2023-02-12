@@ -6,7 +6,7 @@ namespace linkshortner_mvc_net.Data;
 
 public class DataContext : DbContext, IDataContext
 {
-    public DataContext() : base()
+    public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
     }
 
