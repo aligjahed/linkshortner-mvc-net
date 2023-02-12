@@ -20,6 +20,7 @@ logger.LogInformation(builder.Environment.ToString());
 if (builder.Environment.IsDevelopment())
 {
     var connectionString = "Server=localhost;Database=LinkShortner;Port=3306;Uid=aligjahed;Pwd=Ali.1234";
+    var teststtttttttttt = "Server=alfie.iran.liara.ir;Port=30971;Database=heuristic_pare;Uid=root;Pwd=cmnLBrUleo3ORVqGXwTpy49t;";
     builder.Services.AddDbContext<DataContext>(options =>
     {
         options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
@@ -47,9 +48,9 @@ else
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         });
     }
-    catch
+    catch (Exception e)
     {
-        throw new Exception($"Database Connection With {connectionString} Failed");
+        throw new Exception($"Database Connection With {connectionString} Failed; Exception: {e}");
     }
 }
 
