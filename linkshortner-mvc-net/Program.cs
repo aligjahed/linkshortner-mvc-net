@@ -20,6 +20,9 @@ if (builder.Environment.IsDevelopment())
 }
 else
 {
+    // Local logger to test environment values in fly.io
+    var logger = new LoggerFactory().CreateLogger<Type>();
+
     var MYSQLHOST = Environment.GetEnvironmentVariable("HOST");
     var MYSQLPORT = Environment.GetEnvironmentVariable("PORT");
     var MYSQLNAME = Environment.GetEnvironmentVariable("NAME");
@@ -29,6 +32,10 @@ else
     var connectionString =
         $"Server={MYSQLHOST};Port={MYSQLPORT};Database={MYSQLNAME};Uid={MYSQLUSERNAME};Pwd={MYSQLPASSWORD};";
 
+    logger.LogInformation("Logging connection string");
+    logger.LogInformation(connectionString);
+    
+    
     try
     {
         builder.Services.AddDbContext<DataContext>(options =>
